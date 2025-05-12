@@ -2,134 +2,165 @@
 
 ## 📘 Core Concepts
 
-### Introduction to DBMS
+* Introduction to DBMS
 
-* **Definition**: A DBMS is a software system that allows creation, management, and use of databases.
-* **Purpose**: To provide a way to store and retrieve database information that is both convenient and efficient.
-* **Examples of DBMS**: MySQL, PostgreSQL, Oracle, Microsoft SQL Server, MongoDB
+  * **Definition:** A DBMS is a software system that allows creation, management, and use of databases.
+  * **Purpose:** To provide a way to store and retrieve database information that is both convenient and efficient.
+  * **Examples of DBMS:** MySQL, PostgreSQL, Oracle, Microsoft SQL Server, MongoDB
 
-### Database vs. File System
+* Database vs. File System
 
-* **Key Differences**
+  * **Key Differences**
 
-| Feature                 | File System                                           | Database (DBMS)                                            |
-| ----------------------- | ----------------------------------------------------- | ---------------------------------------------------------- |
-| **Data Storage**        | Stores data in files (e.g., .txt, .csv)               | Stores data in structured tables                           |
-| **Data Redundancy**     | High — same data may be stored in multiple files      | Low — uses normalization to reduce redundancy              |
-| **Data Access**         | Manual or through custom programs                     | Accessed using SQL queries                                 |
-| **Data Integrity**      | Hard to enforce                                       | Built-in constraints (e.g., primary & foreign keys)        |
-| **Security**            | Basic file-level protection                           | Role-based access control and permissions                  |
-| **Backup & Recovery**   | Manual and error-prone                                | Automated with recovery support                            |
-| **Concurrency Control** | Difficult — prone to conflicts in multi-user settings | Supports concurrent access and ACID properties             |
-| **Relationships**       | Not supported                                         | Supports relational data through table joins and keys      |
-| **Data Consistency**    | Difficult to maintain across files                    | High consistency maintained through transaction management |
-| **Scalability**         | Limited for large or complex datasets                 | Designed for large-scale applications                      |
+  | Feature                 | File System                                           | Database (DBMS)                                            |
+  | ----------------------- | ----------------------------------------------------- | ---------------------------------------------------------- |
+  | **Data Storage**        | Stores data in files (e.g., .txt, .csv)               | Stores data in structured tables                           |
+  | **Data Redundancy**     | High — same data may be stored in multiple files      | Low — uses normalization to reduce redundancy              |
+  | **Data Access**         | Manual or through custom programs                     | Accessed using SQL queries                                 |
+  | **Data Integrity**      | Hard to enforce                                       | Built-in constraints (e.g., primary & foreign keys)        |
+  | **Security**            | Basic file-level protection                           | Role-based access control and permissions                  |
+  | **Backup & Recovery**   | Manual and error-prone                                | Automated with recovery support                            |
+  | **Concurrency Control** | Difficult — prone to conflicts in multi-user settings | Supports concurrent access and ACID properties             |
+  | **Relationships**       | Not supported                                         | Supports relational data through table joins and keys      |
+  | **Data Consistency**    | Difficult to maintain across files                    | High consistency maintained through transaction management |
+  | **Scalability**         | Limited for large or complex datasets                 | Designed for large-scale applications                      |
 
-> ✅ **Conclusion:**
-> Use **File System** for simple, small-scale tasks.
-> Use **DBMS** for secure, consistent, and multi-user applications.
+  > ✅ **Conclusion:**
+  > Use **File System** for simple, small-scale tasks.
+  > Use **DBMS** for secure, consistent, and multi-user applications.
 
-### Types of DBMS (Hierarchical, Network, Relational, NoSQL)
+* Types of DBMS (Hierarchical, Network, Relational, NoSQL)
 
-| Type                  | Structure                    | Key Features                                                 | Examples                              |
-| --------------------- | ---------------------------- | ------------------------------------------------------------ | ------------------------------------- |
-| **Hierarchical DBMS** | Tree (one-to-many)           | Data organized in parent-child relationships                 | IBM IMS                               |
-| **Network DBMS**      | Graph (many-to-many)         | Allows complex relationships; children can have many parents | IDS, TurboIMAGE                       |
-| **Relational DBMS**   | Tables (rows and columns)    | Data stored in normalized tables; uses SQL                   | MySQL, PostgreSQL, Oracle, SQL Server |
-| **NoSQL DBMS**        | Key-Value / Document / Graph | Schema-less; handles unstructured/semi-structured data       | MongoDB, Redis, Cassandra, Neo4j      |
+  | Type                  | Structure                    | Key Features                                                 | Examples                              |
+  | --------------------- | ---------------------------- | ------------------------------------------------------------ | ------------------------------------- |
+  | **Hierarchical DBMS** | Tree (one-to-many)           | Data organized in parent-child relationships                 | IBM IMS                               |
+  | **Network DBMS**      | Graph (many-to-many)         | Allows complex relationships; children can have many parents | IDS, TurboIMAGE                       |
+  | **Relational DBMS**   | Tables (rows and columns)    | Data stored in normalized tables; uses SQL                   | MySQL, PostgreSQL, Oracle, SQL Server |
+  | **NoSQL DBMS**        | Key-Value / Document / Graph | Schema-less; handles unstructured/semi-structured data       | MongoDB, Redis, Cassandra, Neo4j      |
 
-> 📜 **Note:**
->
-> * **RDBMS** is suitable for structured data and strong consistency.
-> * **NoSQL** is ideal for scalability and flexible schema requirements.
+  > 📝 **Note:**
+  >
+  > * **RDBMS** is suitable for structured data and strong consistency.
+  > * **NoSQL** is ideal for scalability and flexible schema requirements.
 
-### DBMS Architecture (1-tier, 2-tier, 3-tier)
+* DBMS Architecture (1-tier, 2-tier, 3-tier)
 
-| Architecture Type | Description                                                          | Layers Involved                               | Example Use Case                              |
-| ----------------- | -------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| **1-Tier**        | The database and user interface run on the same machine              | DBMS + User directly on the same system       | Local personal DBMS (e.g., MS Access)         |
-| **2-Tier**        | The application communicates directly with the database server       | Client + Database Server                      | Small client-server apps (e.g., desktop apps) |
-| **3-Tier**        | Adds a middle layer between client and database for logic separation | Client + Application Server + Database Server | Web applications (frontend, backend, DB)      |
+  | Architecture Type | Description                                                          | Layers Involved                               | Example Use Case                              |
+  | ----------------- | -------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+  | **1-Tier**        | The database and user interface run on the same machine              | DBMS + User directly on the same system       | Local personal DBMS (e.g., MS Access)         |
+  | **2-Tier**        | The application communicates directly with the database server       | Client + Database Server                      | Small client-server apps (e.g., desktop apps) |
+  | **3-Tier**        | Adds a middle layer between client and database for logic separation | Client + Application Server + Database Server | Web applications (frontend, backend, DB)      |
 
-> 📌 **Key Benefits of 3-Tier Architecture**
->
-> * Better scalability and maintainability
-> * Improved security and performance
-> * Separation of concerns between UI, business logic, and data layer
+  > 📌 **Key Benefits of 3-Tier Architecture**
+  >
+  > * Better scalability and maintainability
+  > * Improved security and performance
+  > * Separation of concerns between UI, business logic, and data layer
 
-## 🥉 Database Design
+## 🧩 Database Design
 
-### Entity-Relationship (ER) Model
+* Entity-Relationship (ER) Model
 
-* Visually represents the relationships between different entities in a database.
+  * It visually represents the relationships between different entities in a database. It is widely used in database design to help define the structure before creating the actual database.
 
-**What is Entity?**
+  **What is Entity?**
 
-* Represents a real-world object or concept that can have data stored about it. (table)
-* Example: A "Student" in a school database or a "Product" in an e-commerce database.
+  * An entity represents a real-world object or concept that can have data stored about it. (table)
+  * Example: A "Student" in a school database or a "Product" in an e-commerce database.
 
-**What is Attribute?**
+  **What is Attribute?**
 
-* Attributes provide more information about an entity.
-* Example: The "Student" entity might have attributes like "Name", "Age", and "Enrollment Number".
+  * Attributes provide more information about an entity. Each entity has a set of attributes that describe its characteristics.
+  * Example: The "Student" entity might have attributes like "Name", "Age", and "Enrollment Number".
 
-**What is Relationship?**
+  **What is Relationship?**
 
-* Represents an association between two or more entities.
-* Example: A "Student" enrolls in a "Course".
+  * A relationship represents an association between two or more entities.
+  * Example: A "Student" enrolls in a "Course". The relationship here is "enrolls", which connects "Student" and "Course".
 
-**What is Key?**
+  **What is Key?**
 
-* Used to uniquely identify rows (records) in a table.
+  * A key is an attribute (or set of attributes) that is used to uniquely identify rows (records) in a table. Keys ensure that data in the table remains unique, accurate, and linked across related tables.
 
-**Types of Keys:**
+  **Types of Keys:**
 
-* **Primary Key**: Cannot be NULL and must be unique. Example: student\_id.
-* **Candidate Key**: Field(s) that could be a primary key. Example: email, username.
-* **Alternate Key**: Candidate keys not chosen as primary. Example: username if email is primary.
-* **Composite Key**: Two or more attributes together. Example: student\_id + course\_id.
-* **Foreign Key**: Refers to primary key in another table.
-* **Super Key**: Any combination of columns that uniquely identifies a row.
+  * **Primary Key:**
 
-**What is Cardinality?**
+    * Cannot be NULL and must be unique.
+    * Example: student\_id in a Students table.
 
-* Defines the number of instances of one entity related to another entity.
+  * **Candidate Key:**
 
-**Types of Cardinality:**
+    * A field (or combination of fields) that can qualify as a primary key.
+    * There can be multiple candidate keys in one table.
+    * One of them is chosen as the primary key.
+    * Example: email and username in a Users table can both be candidate keys.
 
-* One-to-One (1:1)
-* One-to-Many (1\:M)
-* Many-to-Many (M\:N)
+  * **Alternate Key:**
 
-**ER Diagrams (Entity Relation Diagrams)**
+    * Candidate keys that were not chosen as the primary key.
+    * Example: If email is chosen as the primary key, then username becomes an alternate key.
 
-* Graphical representation showing entities, attributes, and relationships.
+  * **Composite Key:**
 
-### Mapping ER Model to Relational Model
+    * A key that is made up of two or more attributes to uniquely identify a record.
+    * Example: In an Enrollment table, student\_id + course\_id could form a composite key.
 
-* Converts ER model components to relational schema (tables, keys).
+  * **Foreign Key:**
 
-### Relational Model Concepts
+    * A field in one table that refers to the primary key of another table.
+    * It creates a relationship between two tables.
+    * Example: student\_id in Enrollments table refers to student\_id in Students table.
 
-* Focuses on tables (relations), rows (tuples), and columns (attributes).
+  * **Super Key:**
 
-### Schema and Instance
+    * Any combination of columns that uniquely identifies a row.
+    * Every primary key is a super key, but not every super key is a primary key.
+    * Example: student\_id, or student\_id + email both are super keys if they uniquely identify records.
 
-* **Schema**: Blueprint/structure of database.
+  **What is Cardinality?**
 
-```sql
-Student(StudentID INT, Name VARCHAR(50), Age INT)
-```
+  * Cardinality defines the number of instances of one entity that can be associated with instances of another entity.
 
-* **Instance**: Actual data in the table at a moment.
+  **Types of Cardinality:**
 
-| StudentID | Name    | Age |
-| --------- | ------- | --- |
-| 1         | Asraful | 22  |
-| 2         | Riya    | 21  |
-| 3         | Karim   | 23  |
+  * One-to-One (1:1): One record in the first entity is associated with exactly one record in the second entity.
+  * One-to-Many (1\:M): One record in the first entity can be associated with multiple records in the second entity.
+  * Many-to-Many (M\:N): Multiple records in the first entity can be associated with multiple records in the second entity.
 
-## 📀 Normalization
+  **ER Diagrams (ER- Entity Relation)**
+
+  * An ER diagram is a graphical representation of the ER model, showing entities, their attributes, and the relationships between them.
+
+  **Mapping ER Model to Relational Model**
+
+  **Relational Model Concepts**
+
+  **Schema and Instance**
+
+  * **Schema:**
+
+    * Definition: Schema is the blueprint or structure of a database. It defines how the data is organized and how the relationships between data are handled.
+    * Example:
+
+    ```
+    Student(StudentID INT, Name VARCHAR(50), Age INT)
+    ```
+
+    This tells us the table has 3 columns: StudentID, Name, and Age.
+
+  * **Instance:**
+
+    * Definition: Instance is the actual content or data stored in the database at a particular moment.
+    * Example:
+      \| StudentID | Name     | Age |
+      \|-----------|----------|-----|
+      \| 1         | Asraful  | 22  |
+      \| 2         | Riya     | 21  |
+      \| 3         | Karim    | 23  |
+      This table content is the instance — the current data inside the table.
+
+## 📐 Normalization
 
 * Functional Dependency
 * 1NF, 2NF, 3NF, BCNF
@@ -146,20 +177,20 @@ Student(StudentID INT, Name VARCHAR(50), Age INT)
 * Subqueries and Nested Queries
 * Indexes and Views
 
-## 🔀 Transaction Management
+## 🔁 Transaction Management
 
 * ACID Properties
 * Transactions and Concurrency
 * Serializability
 * Concurrency Control Techniques (Locking, Timestamping)
 
-## 📂 Storage and File Structure
+## 💾 Storage and File Structure
 
 * File Organization
 * Buffer Management
 * Indexing (Single-level, Multi-level, B+ Tree, Hashing)
 
-## 🤮 Query Processing and Optimization
+## 🧮 Query Processing and Optimization
 
 * Query Execution Plan
 * Heuristics and Cost-Based Optimization
