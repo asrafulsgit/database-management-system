@@ -76,9 +76,11 @@
    across related tables.
    
  - Types of Keys:
+   
    - Primary Key :
     * Cannot be NULL and must be unique.
     *  Example: student_id in a Students table.
+      
    - Candidate Key :
     * A field (or combination of fields) that can qualify as a primary key.
     * There can be multiple candidate keys in one table.
