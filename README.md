@@ -59,85 +59,85 @@
 * It visually represents the relationships between different entities in a database. It is widely used in database design to help define the structure before creating the actual 
   database.
 
-  - what is Entity?
+  ** what is Entity? **
    * An entity represents a real-world object or concept that can have data stored about it. (table)
    * Example: A "Student" in a school database or a "Product" in an e-commerce database.
     
-  - what is Attribute?
-  * Attributes provide more information about an entity. Each entity has a set of attributes that describe its characteristics.
-  * Example: The "Student" entity might have attributes like "Name", "Age", and "Enrollment Number".
+  ** what is Attribute? **
+   * Attributes provide more information about an entity. Each entity has a set of attributes that describe its characteristics.
+   * Example: The "Student" entity might have attributes like "Name", "Age", and "Enrollment Number".
  
- - waht is Relationship?
- * A relationship represents an association between two or more entities.
- * Example: A "Student" enrolls in a "Course". The relationship here is "enrolls", which connects "Student" and "Course".
+ ** waht is Relationship? **
+  * A relationship represents an association between two or more entities.
+  * Example: A "Student" enrolls in a "Course". The relationship here is "enrolls", which connects "Student" and "Course".
    
- - what is key?
- * a key is an attribute (or set of attributes) that is used to uniquely identify rows (records) in a table. Keys ensure that data in the table remains unique, accurate, and linked     
+ ** what is key? **
+  * a key is an attribute (or set of attributes) that is used to uniquely identify rows (records) in a table. Keys ensure that data in the table remains unique, accurate, and linked     
    across related tables.
    
- - Types of Keys:
+ ** Types of Keys: **
    
-   - Primary Key :
+   ** Primary Key : **
     * Cannot be NULL and must be unique.
     *  Example: student_id in a Students table.
       
-   - Candidate Key :
+   ** Candidate Key : **
     * A field (or combination of fields) that can qualify as a primary key.
     * There can be multiple candidate keys in one table.
     * One of them is chosen as the primary key.
     * Example: email and username in a Users table can both be candidate keys.
       
-   - Alternate Key
+   ** Alternate Key **
     * Candidate keys that were not chosen as the primary key.
     * Example: If email is chosen as the primary key, then username becomes an alternate key.
       
-   - Composite Key
+   ** Composite Key **
     * A key that is made up of two or more attributes to uniquely identify a record.
     * Example: In an Enrollment table, student_id + course_id could form a composite key.
       
-   - Foreign Key
+   ** Foreign Key **
     * A field in one table that refers to the primary key of another table.
     * It creates a relationship between two tables.
     * Example: student_id in Enrollments table refers to student_id in Students table.
       
-   - Super Key
+   ** Super Key **
     * Any combination of columns that uniquely identifies a row.
     * Every primary key is a super key, but not every super key is a primary key.
     * Example: student_id, or student_id + email both are super keys if they uniquely identify records.
 
- - what is Cardinality?
- * Cardinality defines the number of instances of one entity that can be associated with instances of another entity.
+ ** what is Cardinality? **
+  * Cardinality defines the number of instances of one entity that can be associated with instances of another entity.
 
- - Types of cardinality:
+ ** Types of cardinality: **
   * One-to-One (1:1): One record in the first entity is associated with exactly one record in the second entity.
   * One-to-Many (1:M): One record in the first entity can be associated with multiple records in the second entity.
   * Many-to-Many (M:N): Multiple records in the first entity can be associated with multiple records in the second entity.
 
-- ER Diagrams (ER- Entity Relation)
-* An ER diagram is a graphical representation of the ER model, showing entities, their attributes, and the relationships between them.
+** ER Diagrams (ER- Entity Relation) **
+ * An ER diagram is a graphical representation of the ER model, showing entities, their attributes, and the relationships between them.
   
-- Mapping ER Model to Relational Model
+** Mapping ER Model to Relational Model **
   
-- Relational Model Concepts
+** Relational Model Concepts **
   
-- Schema and Instance
- - Schema :
- * Definition: Schema is the blueprint or structure of a database. It defines how the data is organized and how the relationships between data are handled.
- Example :
- ```
- Student(StudentID INT, Name VARCHAR(50), Age INT)
- ```
- This tells us the table has 3 columns: StudentID, Name, and Age.
+** Schema and Instance **
+ ** Schema :**
+  * Definition: Schema is the blueprint or structure of a database. It defines how the data is organized and how the relationships between data are handled.
+  Example :
+  ```
+  Student(StudentID INT, Name VARCHAR(50), Age INT)
+  ```
+  This tells us the table has 3 columns: StudentID, Name, and Age.
 
- - Instance :
- * Definition: Instance is the actual content or data stored in the database at a particular moment.
- Example: 
-| StudentID | Name     | Age |
-|-----------|----------|-----|
-| 1         | Asraful  | 22  |
-| 2         | Riya     | 21  |
-| 3         | Karim    | 23  |
-This table content is the instance — the current data inside the table.
+ ** Instance : **
+  * Definition: Instance is the actual content or data stored in the database at a particular moment.
+  Example: 
+ | StudentID | Name     | Age |
+ |-----------|----------|-----|
+ | 1         | Asraful  | 22  |
+ | 2         | Riya     | 21  |
+ | 3         | Karim    | 23  |
+ This table content is the instance — the current data inside the table.
 
  
 ## 📐 Normalization
