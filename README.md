@@ -60,8 +60,8 @@
   database.
 
   - what is Entity?
-  * An entity represents a real-world object or concept that can have data stored about it. (table)
-  * Example: A "Student" in a school database or a "Product" in an e-commerce database.
+   * An entity represents a real-world object or concept that can have data stored about it. (table)
+   * Example: A "Student" in a school database or a "Product" in an e-commerce database.
     
   - what is Attribute?
   * Attributes provide more information about an entity. Each entity has a set of attributes that describe its characteristics.
