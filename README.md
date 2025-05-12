@@ -152,13 +152,13 @@
   * **Instance:**
 
     * Definition: Instance is the actual content or data stored in the database at a particular moment.
-    * Example:
+    * Example: 
       | StudentID | Name     | Age |
       |-----------|----------|-----|
       | 1         | Asraful  | 22  |
       | 2         | Riya     | 21  |
       | 3         | Karim    | 23  |
-      This table content is the instance — the current data inside the table.
+   This table content is the instance — the current data inside the table.
 
 ## 📐 Normalization
 
