@@ -391,7 +391,7 @@ Instead of joining multiple tables:
 
 # 💬 SQL (Structured Query Language)
 
-SQL is the standard language used to interact with relational databases. It is categorized into multiple sublanguages, each serving a specific purpose.
+SQL is the standard language used to interact with relational databases.
 
 ---
 
@@ -405,11 +405,7 @@ DDL is used to define and manage the structure of database objects such as table
 - `DROP`
 - `TRUNCATE`
 
-### ❌ Example Before:
-
-You don’t have any structure defined.
-
-✅ **Example After:**
+✅ **Example:**
 ```sql
 CREATE TABLE Users (
   UserID INT PRIMARY KEY,
@@ -631,10 +627,7 @@ DROP VIEW HR_Employees;
 | Indexes  | Speed up data access            | `CREATE INDEX`, `DROP INDEX`                 |
 | Views    | Virtual tables from SELECT      | `CREATE VIEW`, `SELECT`, `DROP VIEW`         |
 
----
-
-> 💡 Mastering SQL is essential for backend development, data analytics, and database design.  
-> 🛠️ Use this reference as a cheat sheet while working with SQL queries and designing schemas.
+--- 
 
 ## 🔁 Transaction Management
 
