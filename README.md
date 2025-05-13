@@ -160,22 +160,481 @@
       | 3         | Karim    | 23  |
    This table content is the instance — the current data inside the table.
 
-## 📐 Normalization
+# 📐 Normalization
 
-* Functional Dependency
-* 1NF, 2NF, 3NF, BCNF
-* Multivalued and Join Dependencies
-* Denormalization
+**Database Normalization** is the process of structuring a relational database to reduce data redundancy and improve data integrity. It involves decomposing large tables into smaller ones and defining relationships between them using a series of **normal forms**.
 
-## 💬 SQL (Structured Query Language)
+---
 
-* DDL (Data Definition Language)
-* DML (Data Manipulation Language)
-* DCL (Data Control Language)
-* TCL (Transaction Control Language)
-* Joins (INNER, LEFT, RIGHT, FULL)
-* Subqueries and Nested Queries
-* Indexes and Views
+## 🔗 Functional Dependency
+
+A **functional dependency** occurs when one attribute uniquely determines another attribute.
+
+**Notation:** `A → B` means B is functionally dependent on A.
+
+**Example:**
+
+| StudentID | StudentName |
+|-----------|-------------|
+| 101       | Alice       |
+| 102       | Bob         |
+
+Here, `StudentID → StudentName`
+
+---
+
+## 📘 First Normal Form (1NF)
+
+A table is in **1NF** if:
+
+- All attributes contain only atomic (indivisible) values.
+- Each record is unique.
+- No repeating groups or arrays.
+
+❌ **Not in 1NF:**
+
+| StudentID | Name  | Courses           |
+|-----------|-------|-------------------|
+| 101       | Alice | Math, Physics     |
+| 102       | Bob   | English, History  |
+
+✅ **In 1NF (after fixing):**
+
+| StudentID | Name  | Course    |
+|-----------|-------|-----------|
+| 101       | Alice | Math      |
+| 101       | Alice | Physics   |
+| 102       | Bob   | English   |
+| 102       | Bob   | History   |
+
+---
+
+## 📙 Second Normal Form (2NF)
+
+A table is in **2NF** if:
+
+- It is in 1NF.
+- All non-key attributes are **fully functionally dependent** on the entire primary key.
+
+**❌ Not in 2NF (Partial dependency):**
+
+| StudentID | CourseID | StudentName | CourseName |
+|-----------|----------|-------------|------------|
+| 101       | C01      | Alice       | Math       |
+| 102       | C02      | Bob         | English    |
+
+Here, `StudentName` depends only on `StudentID`, and `CourseName` only on `CourseID`.
+
+✅ **Split into two tables:**
+
+**Students Table:**
+
+| StudentID | StudentName |
+|-----------|-------------|
+| 101       | Alice       |
+| 102       | Bob         |
+
+**Courses Table:**
+
+| CourseID | CourseName |
+|----------|------------|
+| C01      | Math       |
+| C02      | English    |
+
+**Enrollment Table:**
+
+| StudentID | CourseID |
+|-----------|----------|
+| 101       | C01      |
+| 102       | C02      |
+
+---
+
+## 📗 Third Normal Form (3NF)
+
+A table is in **3NF** if:
+
+- It is in 2NF.
+- There are **no transitive dependencies**.
+
+**❌ Not in 3NF:**
+
+| StudentID | StudentName | DepartmentID | DepartmentName |
+|-----------|-------------|--------------|----------------|
+| 101       | Alice       | D01          | Computer Science |
+| 102       | Bob         | D02          | Literature       |
+
+Here, `DepartmentName` is dependent on `DepartmentID`, not directly on `StudentID`.
+
+✅ **Split into:**
+
+**Students Table:**
+
+| StudentID | StudentName | DepartmentID |
+|-----------|-------------|--------------|
+| 101       | Alice       | D01          |
+| 102       | Bob         | D02          |
+
+**Departments Table:**
+
+| DepartmentID | DepartmentName     |
+|--------------|--------------------|
+| D01          | Computer Science   |
+| D02          | Literature         |
+
+---
+
+## 📘 Boyce-Codd Normal Form (BCNF)
+
+A table is in **BCNF** if:
+
+- For every non-trivial functional dependency `X → Y`, X is a super key.
+
+**❌ Not in BCNF:**
+
+| Teacher | Subject | Room |
+|---------|---------|------|
+| Alice   | Math    | 101  |
+| Bob     | Math    | 101  |
+
+Assume:
+- `Teacher → Subject`
+- `Room → Subject`
+
+Neither `Teacher` nor `Room` is a super key.
+
+✅ **Decompose into:**
+
+**Teacher_Subject Table:**
+
+| Teacher | Subject |
+|---------|---------|
+| Alice   | Math    |
+| Bob     | Math    |
+
+**Room_Subject Table:**
+
+| Room | Subject |
+|------|---------|
+| 101  | Math    |
+
+---
+
+## 🔁 Multivalued Dependency (4NF)
+
+A **multivalued dependency** exists when one attribute is independent of another, but both depend on the same key.
+
+**❌ Not in 4NF:**
+
+| Employee | Skill     | Language  |
+|----------|-----------|-----------|
+| John     | Python    | English   |
+| John     | Java      | English   |
+| John     | Python    | Spanish   |
+| John     | Java      | Spanish   |
+
+✅ **Split into:**
+
+**Employee_Skill Table:**
+
+| Employee | Skill  |
+|----------|--------|
+| John     | Python |
+| John     | Java   |
+
+**Employee_Language Table:**
+
+| Employee | Language |
+|----------|----------|
+| John     | English  |
+| John     | Spanish  |
+
+---
+
+## 🔗 Join Dependency (5NF)
+
+A **join dependency** exists when a table can be split into multiple tables and then recombined (joined) to recreate the original without loss of data.
+
+Used in advanced normalization where there are complex many-to-many relationships.
+
+---
+
+## 🧩 Denormalization
+
+**Denormalization** is the process of adding redundancy to improve read performance at the cost of update complexity.
+
+**Example:**
+
+Instead of joining multiple tables:
+
+| OrderID | CustomerName | ProductName | Price |
+|---------|--------------|-------------|-------|
+| 501     | Alice        | Shirt       | $20   |
+
+✅ Reduces query time but introduces redundancy (e.g., if Alice changes her name, multiple rows must be updated).
+
+---
+
+## ✅ Summary Table
+
+| Normal Form | Key Condition                                       |
+|-------------|-----------------------------------------------------|
+| 1NF         | Atomic values, no repeating groups                  |
+| 2NF         | 1NF + No partial dependencies                       |
+| 3NF         | 2NF + No transitive dependencies                    |
+| BCNF        | Every determinant is a super key                    |
+| 4NF         | No multivalued dependencies                         |
+| 5NF         | No join dependencies                                |
+
+
+
+
+# 💬 SQL (Structured Query Language)
+
+SQL is the standard language used to interact with relational databases. It is categorized into multiple sublanguages, each serving a specific purpose.
+
+---
+
+## 📘 DDL (Data Definition Language)
+
+DDL is used to define and manage the structure of database objects such as tables, views, indexes, etc.
+
+### ✅ Common Commands:
+- `CREATE`
+- `ALTER`
+- `DROP`
+- `TRUNCATE`
+
+### ❌ Example Before:
+
+You don’t have any structure defined.
+
+✅ **Example After:**
+```sql
+CREATE TABLE Users (
+  UserID INT PRIMARY KEY,
+  Name VARCHAR(50),
+  Email VARCHAR(100)
+);
+```
+
+---
+
+## 📗 DML (Data Manipulation Language)
+
+DML is used to manipulate the data inside database tables.
+
+### ✅ Common Commands:
+- `INSERT`
+- `UPDATE`
+- `DELETE`
+- `SELECT`
+
+### ❌ Empty Table:
+
+| UserID | Name  | Email       |
+|--------|-------|-------------|
+|        |       |             |
+
+✅ **After Insert:**
+```sql
+INSERT INTO Users (UserID, Name, Email)
+VALUES (1, 'Alice', 'alice@example.com');
+```
+
+| UserID | Name  | Email            |
+|--------|-------|------------------|
+| 1      | Alice | alice@example.com|
+
+---
+
+## 🛡️ DCL (Data Control Language)
+
+DCL is used to control access to the database and define user privileges.
+
+### ✅ Common Commands:
+- `GRANT`
+- `REVOKE`
+
+✅ **Grant Permissions:**
+```sql
+GRANT SELECT, INSERT ON Users TO 'readonly_user';
+```
+
+✅ **Revoke Permissions:**
+```sql
+REVOKE INSERT ON Users FROM 'readonly_user';
+```
+
+---
+
+## 🔄 TCL (Transaction Control Language)
+
+TCL is used to manage changes made by DML statements and group them into logical transactions.
+
+### ✅ Common Commands:
+- `BEGIN`
+- `COMMIT`
+- `ROLLBACK`
+- `SAVEPOINT`
+
+✅ **Example Transaction:**
+```sql
+BEGIN;
+UPDATE Accounts SET Balance = Balance - 100 WHERE AccountID = 1;
+UPDATE Accounts SET Balance = Balance + 100 WHERE AccountID = 2;
+COMMIT;
+```
+
+❌ If something fails, rollback:
+```sql
+ROLLBACK;
+```
+
+---
+
+## 🔗 Joins
+
+Joins combine rows from two or more tables based on related columns.
+
+---
+
+### 🔸 INNER JOIN
+
+Returns only matching rows.
+
+```sql
+SELECT Orders.OrderID, Customers.Name
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+```
+
+---
+
+### 🔸 LEFT JOIN
+
+Returns all rows from the left table and matched rows from the right table.
+
+```sql
+SELECT Customers.Name, Orders.OrderID
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+```
+
+---
+
+### 🔸 RIGHT JOIN
+
+Returns all rows from the right table and matched rows from the left table.
+
+```sql
+SELECT Orders.OrderID, Customers.Name
+FROM Customers
+RIGHT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+```
+
+---
+
+### 🔸 FULL OUTER JOIN
+
+Returns all rows when there is a match in either table.
+
+```sql
+SELECT Customers.Name, Orders.OrderID
+FROM Customers
+FULL OUTER JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+```
+
+---
+
+## 🧠 Subqueries & Nested Queries
+
+A subquery is a query within another query, useful for filtering or deriving data.
+
+✅ **Subquery in WHERE clause:**
+```sql
+SELECT Name FROM Employees
+WHERE DepartmentID = (
+  SELECT DepartmentID FROM Departments WHERE DepartmentName = 'HR'
+);
+```
+
+✅ **Subquery in FROM clause:**
+```sql
+SELECT d.AvgSalary FROM (
+  SELECT DepartmentID, AVG(Salary) AS AvgSalary
+  FROM Employees
+  GROUP BY DepartmentID
+) d;
+```
+
+✅ **Correlated Subquery:**
+```sql
+SELECT Name FROM Employees e1
+WHERE Salary > (
+  SELECT AVG(Salary)
+  FROM Employees e2
+  WHERE e2.DepartmentID = e1.DepartmentID
+);
+```
+
+---
+
+## 🚀 Indexes
+
+Indexes are used to speed up searches and queries on tables.
+
+✅ **Create Index:**
+```sql
+CREATE INDEX idx_name ON Employees(Name);
+```
+
+✅ **Drop Index:**
+```sql
+DROP INDEX idx_name;
+```
+
+---
+
+## 👁️ Views
+
+Views are virtual tables based on the result of an SQL query.
+
+✅ **Create View:**
+```sql
+CREATE VIEW HR_Employees AS
+SELECT Name, Department FROM Employees WHERE Department = 'HR';
+```
+
+✅ **Use View:**
+```sql
+SELECT * FROM HR_Employees;
+```
+
+✅ **Drop View:**
+```sql
+DROP VIEW HR_Employees;
+```
+
+---
+
+## 📋 Summary Table
+
+| Category | Description                     | Example Commands                             |
+|----------|---------------------------------|----------------------------------------------|
+| DDL      | Define structure                | `CREATE`, `ALTER`, `DROP`, `TRUNCATE`        |
+| DML      | Manipulate data                 | `INSERT`, `UPDATE`, `DELETE`, `SELECT`       |
+| DCL      | Control user access             | `GRANT`, `REVOKE`                            |
+| TCL      | Manage transactions             | `BEGIN`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`   |
+| Joins    | Combine tables                  | `INNER`, `LEFT`, `RIGHT`, `FULL OUTER`       |
+| Subquery | Query inside a query            | `SELECT ... WHERE (...)`                     |
+| Indexes  | Speed up data access            | `CREATE INDEX`, `DROP INDEX`                 |
+| Views    | Virtual tables from SELECT      | `CREATE VIEW`, `SELECT`, `DROP VIEW`         |
+
+---
+
+> 💡 Mastering SQL is essential for backend development, data analytics, and database design.  
+> 🛠️ Use this reference as a cheat sheet while working with SQL queries and designing schemas.
 
 ## 🔁 Transaction Management
 
